@@ -1,0 +1,32 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 1000  # Hz
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    # [수정] 이름: arm_controller, 타입: JointTrajectoryController
+    arm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+# [수정] arm_controller 세부 설정
+arm_controller:
+  ros__parameters:
+    joints:
+      - joint1
+      - joint2
+      - joint3
+      - joint4
+      - joint5
+      - joint6
+    
+    command_interfaces:
+      - position
+    
+    state_interfaces:
+      - position
+      - velocity
+
+    # [중요] 궤적 실행 시 허용 오차 등 설정 (기본값 사용)
+    open_loop_control: true
+    allow_partial_joints_goal: false
